@@ -36,6 +36,6 @@ if [ -e "package.json" ]; then
     npm install
 fi
 
-appcenter code-push-standalone release-react $app_id $platform --quiet --description "${description}" --deployment-name $deployment --rollout $percentage --targetBinaryVersion "${target_binary_version}" $private_key $options
+appcenter code-push-standalone release-react "${app_id}" $platform --quiet --description "${description}" --deployment-name $deployment --rollout $percentage --targetBinaryVersion "${target_binary_version}" $private_key $options
 
 exit 0

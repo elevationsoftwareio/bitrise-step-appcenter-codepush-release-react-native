@@ -1,13 +1,24 @@
 #!/bin/bash
 set -ex
 
-# Ensure AppCenter CLI installed
-if which appcenter > /dev/null; then
-  echo "AppCenter CLI already installed."
+# Ensure CodePush Standalone installed
+if which code-push-standalone > /dev/null; then
+  echo "CodePush CLI already installed."
 else
-  echo "AppCenter CLI is not installed. Installing..."
-  npm install -g appcenter-cli
+  echo "CodePush CLI is not installed. Installing..."
+  git clone https://github.com/microsoft/code-push-server code-push-server
+  cd code-push-server/cli
+  npm install
+  npm run build
+  npm install -g
 fi
+
+echo "Testing CodePush CLI"
+code-push-standalone --version
+
+echo "Authenticating with CodePush"
+code-push-standalone login --key $access_key https://apps.deploypulse.io
+
 
 # Change the working dir if necessary
 if [ ! -z "${react_native_project_root}" ] ; then
@@ -19,6 +30,12 @@ if [ ! -z "${react_native_project_root}" ] ; then
     fi
 fi
 
-appcenter codepush release-react -a $app_id --token $api_token --quiet --description "${description}" --deployment-name $deployment --rollout $percentage $private_key $options
+# install dependencies
+if [ -e "package.json" ]; then
+    echo "==> Installing node modules"
+    npm install
+fi
+
+appcenter code-push-standalone release-react $app_id $platform --quiet --description "${description}" --deployment-name $deployment --rollout $percentage --targetBinaryVersion "${target_binary_version}" $private_key $options
 
 exit 0

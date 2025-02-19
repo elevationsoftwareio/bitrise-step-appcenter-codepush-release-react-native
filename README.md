@@ -1,6 +1,6 @@
 # DeployPulse CodePush Release React Native
 
-Utilise appcenter-cli command appcenter codepush release-react to release an update
+Utilizes codepush CLI command codepush-standalone release-react to release an update
 
 
 ## How to use this Step

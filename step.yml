@@ -4,11 +4,11 @@ summary: |
   Release a React Native update to AppCenter CodePush
 description: |
   Utilise appcenter-cli command appcenter codepush release-react to release an update
-website: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
-source_code_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native
-support_url: https://github.com/adrianchinghc/bitrise-step-appcenter-codepush-release-react-native/issues
+website: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native
+source_code_url: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native
+support_url: https://github.com/elevationsoftwareio/bitrise-step-appcenter-codepush-release-react-native/issues
 host_os_tags:
-  - osx-10.10
+  - osx-10.11
   - ubuntu-16.04
 
 project_type_tags:
@@ -41,19 +41,18 @@ inputs:
       description: |
         Path where the React Native project is located.
       is_required: true
-  - app_id: $APPCENTER_APP_ID
+  - app_id: $APP_ID
     opts:
-      title: AppCenter App ID
-      summary: AppCenter application identifier (Organization/Owner Name + App Name).
+      title: Your App ID
+      summary: DeployPulse application identifier (App Name).
       description: |
-        AppCenter Application Identifier is a combination of your Organization/Owner Name and an Application Name.
-        For example: `Upstack-Studio/bitrise-android`
+        The name of the app as it appears in the DeployPulse dashboard. You will need a valid api token to authenticate with DeployPulse.
       is_required: true
-  - api_token: $APPCENTER_API_TOKEN
+  - api_token: $API_TOKEN
     opts:
-      title: AppCenter API Token
+      title: API Token
       description: |
-        AppCenter API Token can be obtained from [here](https://appcenter.ms/settings/apitokens). `New API Token` > `Enter a description for the token` > `Select Full Access` > `Add New API Token`
+         API Tokens can be obtained from following steps [here](https://docs.deploypulse.io/quickstart#registering-and-login).
       is_required: true
       is_sensitive: true
   - deployment: 'Staging'
@@ -62,6 +61,18 @@ inputs:
       description: |
         This specifies which deployment you want to release the update to. This defaults to Staging, but when you're ready to deploy to Production, or one of your own custom deployments, just explicitly set this argument. See [here](https://docs.microsoft.com/en-us/appcenter/distribution/codepush/cli#deployment-name-parameter) for details.
       is_required: true
+  - platform: "ios"
+    opts:
+      title: Platform
+      description: |
+        The platform you want to release the update to. This defaults to ios, but you can specify android if you want to release to the Android platform.
+      is_required: true
+  - target_binary_version:
+    opts:
+      title: Target Binary Version
+      description: |
+        The binary version of the app you are releasing the update for. This is required when releasing an update for a specific binary version of your app, and it is recommended that you always specify this argument.
+      is_required: false
   - description:
     opts:
       title: Description
@@ -76,11 +87,11 @@ inputs:
         It is the distribution percentage (0 - 100) of your new update in codepush, by default it is 100% of the users
       is_required: true
 
-  - private_key: -k $APPCENTER_SIGN_PRIVATE_KEY
+  - private_key: -k $SIGN_PRIVATE_KEY
     opts:
       title: Signed update
       description: |
-        To sign your new update in codepush, '$ APPCENTER_SIGN_PRIVATE_KEY' must be the one who stores your private key to sign
+        To sign your new update in codepush, '$SIGN_PRIVATE_KEY' must be the one who stores your private key to sign
       is_required: false
 
   - options:

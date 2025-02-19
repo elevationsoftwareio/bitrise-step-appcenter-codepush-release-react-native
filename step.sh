@@ -5,6 +5,7 @@ set -ex
 if which code-push-standalone > /dev/null; then
   echo "CodePush CLI already installed."
 else
+  cd ..
   echo "CodePush CLI is not installed. Installing..."
   git clone https://github.com/microsoft/code-push-server code-push-server
   cd code-push-server/cli
@@ -18,6 +19,8 @@ code-push-standalone --version
 
 echo "Authenticating with CodePush"
 code-push-standalone login --key $api_token https://apps.deploypulse.io
+
+cd "$BITRISE_SOURCE_DIR"
 
 
 # Change the working dir if necessary

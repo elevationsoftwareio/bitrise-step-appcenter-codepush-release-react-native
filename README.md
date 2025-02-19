@@ -1,6 +1,6 @@
 # DeployPulse CodePush Release React Native
 
-Utilizes codepush CLI command codepush-standalone release-react to release an update
+Utilizes codepush CLI command codepush-standalone release-react to release an update to DeployPulse
 
 
 ## How to use this Step

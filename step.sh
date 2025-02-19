@@ -17,7 +17,7 @@ echo "Testing CodePush CLI"
 code-push-standalone --version
 
 echo "Authenticating with CodePush"
-code-push-standalone login --key $access_key https://apps.deploypulse.io
+code-push-standalone login --key $api_token https://apps.deploypulse.io
 
 
 # Change the working dir if necessary

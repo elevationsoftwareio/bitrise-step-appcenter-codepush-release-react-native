@@ -16,8 +16,8 @@ workflows:
         inputs:
         - options: $OPTIONS
         - target_binary_version: $TARGET_BINARY_VERSION
-        - api_token: $APPCENTER_API_TOKEN
-        - app_id: $APPCENTER_APP_ID
+        - api_token: $API_TOKEN
+        - app_id: $APP_ID
         - react_native_project_root: $REACT_NATIVE_PROJECT_ROOT
         - deployment: $DEPLOYMENT_NAME
         - description: $DESCRIPTION

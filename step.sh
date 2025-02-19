@@ -17,6 +17,12 @@ fi
 echo "Testing CodePush CLI"
 code-push-standalone --version
 
+# if no api token is provided, return an error
+if [ -z "${api_token}" ] ; then
+    echo " [!] Missing required input: api_token"
+    exit 0
+fi
+
 echo "Authenticating with CodePush"
 code-push-standalone login --key $api_token https://apps.deploypulse.io
 
